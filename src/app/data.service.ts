@@ -5,7 +5,7 @@ import { RecipeService } from './recipe-book/recipe.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 
 @Injectable()
-export class ManageService {
+export class DataService {
     constructor( private http: Http,
                  private recipeService: RecipeService,
                  private shoppingListService: ShoppingListService ) {}
@@ -16,16 +16,35 @@ export class ManageService {
             ingredients: this.shoppingListService.getIngredients()
         };
 
-        return this.http.put( 'https://lby-lets-cook.firebaseio.com/data.json', data )
+        this.http.put( 'https://lby-lets-cook.firebaseio.com/data.json', data )
             .map( ( response: Response ) => {
                 return response.json();
-            } );
+            } )
+            .subscribe(
+                ( response ) => {
+                    console.log( response );
+                },
+                ( error ) => {
+                    console.log( error );
+                }
+            );
     }
 
     fetchData() {
         return this.http.get( 'https://lby-lets-cook.firebaseio.com/data.json' )
             .map( ( response: Response ) => {
                 return response.json();
-            } );
+            } )
+            .subscribe(
+                ( data ) => {
+
+                    // avoid empty data
+                    data = data ? data : {};
+
+                    // set data
+                    this.recipeService.setRecipes( data['recipes'] || [] );
+                    this.shoppingListService.setIngredients( data['ingredients'] || [] );
+                }
+            );
     }
 }

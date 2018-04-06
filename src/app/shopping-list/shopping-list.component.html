@@ -1,0 +1,20 @@
+<app-shopping-edit></app-shopping-edit>
+<hr>
+<ul class="list-group">
+	<!-- <app-shopping-item></app-shopping-item> -->
+	<div
+        class="shopping-list-item clearfix"
+        *ngFor="let ingredient of ingredients; let idx = index"
+        [ngClass]="{ selected: editIndex === idx }"
+    >
+        <a
+            class="delete-btn"
+            (click)="onDelete( idx )"
+        >X</a>
+        <a
+            class="select-btn"
+            (click)="onEdit( idx )"
+        >{{ ingredient.name }} x {{ ingredient.amount }} {{ ingredient.unit }}</a>
+	</div>
+
+</ul>

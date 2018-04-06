@@ -1,0 +1,22 @@
+.shopping-list-item + .shopping-list-item {
+    border-top: 1px solid #DDDDDD;
+}
+.shopping-list-item:hover {
+    background-color: #F8F8F8;
+}
+.shopping-list-item.selected {
+    background-color: aliceblue;
+}
+.shopping-list-item > a {
+    padding: 10px 15px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.shopping-list-item > .delete-btn {
+    float: right;
+}
+.shopping-list-item > .select-btn {
+    display: block;
+    overflow: hidden;
+}

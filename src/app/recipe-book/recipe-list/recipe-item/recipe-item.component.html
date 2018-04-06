@@ -1,0 +1,9 @@
+<a routerLinkActive="active" [routerLink]="index" class="list-group-item clearfix">
+	<div class="pull-right">
+		<img [src]="data.imgPath" [alt]="data.name" class="img-responsive" style="max-height: 80px;">
+	</div>
+	<div class="">
+		<h4 class="list-group-item-heading">{{ data.name }}</h4>
+    	<p class="list-group-item-text">{{ data.description }}</p>
+	</div>
+</a>

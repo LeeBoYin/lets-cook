@@ -1,6 +1,5 @@
 import { Subject } from 'rxjs/Subject';
 import { Recipe } from './recipe.model';
-import { Ingredient } from '../shared/ingredient.model';
 
 export class RecipeService {
     private recipes: Recipe[] = [
@@ -58,7 +57,6 @@ export class RecipeService {
     }
 
     updateRecipe( idx: number, updatedRecipe ) {
-        console.log( updatedRecipe );
         this.recipes[idx] = updatedRecipe;
         this.recipesChanged.next( this.getRecipes() );
     }

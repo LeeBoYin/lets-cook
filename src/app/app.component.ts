@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { DataService } from './data.service';
 import * as firebase from 'firebase';
+import { AuthService } from './auth/auth.service';
+import { DataService } from './data.service';
 
 @Component({
     selector: 'app-root',
@@ -10,7 +11,8 @@ import * as firebase from 'firebase';
 })
 export class AppComponent implements  OnInit {
 
-    constructor( private dataService: DataService ) {
+    constructor( private authService: AuthService,
+                 private dataService: DataService) {
 
     }
 
@@ -24,6 +26,11 @@ export class AppComponent implements  OnInit {
             storageBucket: 'lby-lets-cook.appspot.com',
             messagingSenderId: '605942186235'
         });
-        this.dataService.fetchData();
+
+        // fetch data when signed in
+        this.authService.signedIn.subscribe( () => {
+            this.dataService.fetchData();
+        } );
+
     }
 }

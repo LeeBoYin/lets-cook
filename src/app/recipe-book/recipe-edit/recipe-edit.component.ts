@@ -123,4 +123,8 @@ export class RecipeEditComponent implements OnInit {
         this.router.navigate( ['../'], { relativeTo: this.activatedRoute } );
     }
 
+    getControls() {
+        return (<FormArray>this.editForm.get('ingredients')).controls;
+    }
+
 }
